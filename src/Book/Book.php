@@ -20,26 +20,25 @@ class Book
      *
      * @var array $chapters Tableau contenant la liste des chapitres.
      */
-    protected array $chapters;
+    protected $chapters;
 
     /**
      *
      * @param array $chapters Tableaux contenant la liste des chapitres.
      */
-    public function __construct(array $chapters)
+    public function __construct($chapters)
     {
-        if (is_array ($chapters)){
+        if (is_array($chapters)) {
             $this->chapters = $chapters;
         }
     }
 
     /**
      * Fonction qui ajoute un nouveau chapitre à la liste.
-     * @param array $param
+     * @param array $chapter
      */
-    public function addChapter($param)
+    public function addChapter($chapter)
     {
-        var_dump($param);
+        $this->chapters[] = $chapter;
     }
-
 }

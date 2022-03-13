@@ -1,0 +1,16 @@
+{
+    "name": "franckblanchard/php-book",
+    "description": "Book, une classe php pour la création de livre.",
+    "keywords": ["livre","documentation"],
+    "homepage": "https://github.com/FranckBlanchard/php-book",
+    "authors": [
+        {
+            "name": "Franck Blanchard",
+            "email": "info@lefoudesbois.ca"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Book\\": "src/Book"}
+    }
+
+}
