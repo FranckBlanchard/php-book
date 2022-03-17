@@ -11,6 +11,8 @@
     ],
     "autoload": {
         "psr-4": {"Book\\": "src/Book"}
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.4"
     }
-
 }

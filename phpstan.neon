@@ -1,0 +1,11 @@
+parameters:
+	level: 7
+	paths:
+		- app
+		- src/Book
+		- /
+	excludePaths:
+		- /vendor/*
+	ignoreErrors:
+		- '#Variable \$Chapitres might not be defined.#'
+		- '#Variable \$path might not be defined.#'
