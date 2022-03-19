@@ -12,5 +12,4 @@ require __DIR__ . '/app/config.php';
 $mybook= new \Book\Book($path,$Chapitres);
 
 $mybook->addChapter(array ('Chapitre x','chapitre-x','chapitrex.md'));
-
-var_dump ($mybook);
+//var_dump($mybook);

@@ -9,4 +9,4 @@ $Chapitres[] = array('Conclusion', 'chapitre-3', 'chapitre3.md');
 /**
  * @var string[]|null $path répertoire des des fichiers sources et destinations
  */
-$path = array("src" => "src","build"=>"build");
+$path = array("src" => "app/soce","build"=>"app/build");
