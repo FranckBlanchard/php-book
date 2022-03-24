@@ -1,7 +1,7 @@
 {
     "name": "franckblanchard/php-book",
     "description": "Book, une classe php pour la création de livre.",
-    "keywords": ["livre","documentation"],
+    "keywords": ["livre", "documentation"],
     "homepage": "https://github.com/FranckBlanchard/php-book",
     "authors": [
         {
@@ -9,10 +9,14 @@
             "email": "info@lefoudesbois.ca"
         }
     ],
+    "license": "MIT",
     "autoload": {
-        "psr-4": {"Book\\": "src/Book"}
+        "psr-4": {
+            "Book\\": "src/Book"
+        }
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.4"
+        "phpstan/phpstan": "^1.4",
+        "squizlabs/php_codesniffer": "3.*"
     }
 }

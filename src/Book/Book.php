@@ -14,7 +14,6 @@ namespace Book;
  */
 class Book
 {
-
     /**
      * @var array<array<string>>|null $chapters Tableau contenant la liste des chapitres.
      */
@@ -22,13 +21,14 @@ class Book
 
     /**
      * Tableau contenant les chemins par défaut, des répertoires sources, et destinations du livre a créé.
-     * @var array<string>|null $filePath Tableau contenant les répertoires sources et destinations des fichiers a traiter.
+     * @var array<string>|null $filePath Chemin des répertoires sources et destinations des fichiers a traiter.
      */
     protected $filePath = array("src" => 'app/src', "build" => 'app/build');
 
     /**
      * Initialisation de notre objet Book.
-     * @param array<string> $filePath Répertoire des fichiers source Markdown et répertoire de destination des fichiers créés.
+     * @param array<string> $filePath Chemin des fichiers source Markdown et répertoire de destination
+     * des fichiers a créer.
      * @param array<array<string>>|null $chapters Tableaux contenant la liste des chapitres.
      */
     public function __construct($filePath, $chapters = null)
@@ -44,8 +44,15 @@ class Book
         /**
          * Vérification et initialisation des chemins des répertoires
          */
+        /**
+         * Initialisation du répertoire des fichiers sources en Markdown
+         */
         $this->initPath('src', $filePath);
+        /**
+         * Initialisation du répertoire des fichiers cibles pdf,html...
+         */
         $this->initPath('build', $filePath);
+
         $this->msgConsole("Fin de l'initialisation.");
     }
 
@@ -107,7 +114,5 @@ class Book
      */
     public function createHtmlFileMd($mdFile): void
     {
-
     }
-
 }
