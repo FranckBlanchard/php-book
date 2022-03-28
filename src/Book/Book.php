@@ -6,6 +6,8 @@
 
 namespace Book;
 
+use Book\Utils\Console;
+
 /**
  * Book est une class PHP pour gérer la gestion d'une documentation, en s'inspirant du fonctionnement d'un livre.
  *
@@ -37,9 +39,9 @@ class Book
          * Vérification de la liste des chapitres
          */
         if (is_array($chapters)) {
-            $this->msgConsole('Initialisation de la liste des chapitres.');
+            Console::writeln("Initialisation de la liste des chapitres.");
             $this->chapters = $chapters;
-            $this->msgConsole('Listes des chapitres initialisé.');
+            Console::writeln("Listes des chapitres initialisé.");
         }
         /**
          * Vérification et initialisation des chemins des répertoires
@@ -48,12 +50,12 @@ class Book
          * Initialisation du répertoire des fichiers sources en Markdown
          */
         $this->initPath('src', $filePath);
+        Console::writeln(sprintf("Vos fichiers sources devront se trouver dans le répertoire: %s .", $filePath['src']));
         /**
          * Initialisation du répertoire des fichiers cibles pdf,html...
          */
         $this->initPath('build', $filePath);
-
-        $this->msgConsole("Fin de l'initialisation.");
+        Console::writeln("Fin de l'initialisation.");
     }
 
     /**
@@ -65,9 +67,11 @@ class Book
         if (is_array($path)) {
             if (array_key_exists($key, $path) && $this->isValidPath($path[$key])) {
                 $this->filePath[$key] = $path[$key];
-                $this->msgConsole("Initialisation du répertoire : < $key > à < $path[$key] >.");
+                $msg = sprintf("Initialisation du répertoire : < %s > à < %s >.", $key, $path[$key]);
+                Console::writeln($msg, "succes");
             } else {
-                $this->msgConsole("ERREUR: le répertoire < $path[$key] > n'existe pas!");
+                $msg = sprintf("ERREUR: le répertoire < %s > n'existe pas!", $path[$key]);
+                Console::writeln($msg, "danger");
             }
         }
     }
@@ -80,22 +84,10 @@ class Book
     protected function isValidPath($path = null): bool
     {
         if (isset($path) && is_dir($path)) {
-//            $this->msgConsole("Le répertoire < $path > est valide.");
             return true;
         } else {
-//            $this->msgConsole("Le répertoire " . $path . " est invalide.");
             return false;
         }
-    }
-
-    /**
-     * Fonction d'affichage de message d'information.
-     * @param string $msg Message a afficher.
-     * @return void
-     */
-    protected function msgConsole($msg): void
-    {
-        printf("\n%s\n", $msg);
     }
 
     /**
@@ -106,13 +98,15 @@ class Book
     public function addChapter($chapter): void
     {
         $this->chapters[] = $chapter;
+        Console::writeln(sprintf("Le chapitre « %s » a été ajouté.", $chapter[0]), "succes");
     }
 
     /**
      *
-     * @param string $mdFile Nom du fichier Markdown a transformer
+     *
      */
-    public function createHtmlFileMd($mdFile): void
+    public function createHtmlFromMarkdowndFile(): void
     {
+        Console::writeln("Création du fichier html.");
     }
 }

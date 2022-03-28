@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/app/config.php';
 /**
  * Création de l'instance $mybook.
@@ -8,7 +8,8 @@ require __DIR__ . '/app/config.php';
 /**
  * @var array<array<string>> $chapitres
  */
+$mybook = new \Book\Book($path, $Chapitres);
 
-$mybook= new \Book\Book($path,$Chapitres);
-
-$mybook->addChapter(array ('Chapitre x','chapitre-x','chapitrex.md'));
+$mybook->addChapter(array('Chapitre x', 'chapitre-x', 'chapitrex.md'));
+$htmlBook = new \Book\PandocBuildHtml();
+$htmlBook->setMarkdownFileName("chapitre1.md");
