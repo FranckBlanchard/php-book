@@ -26,6 +26,11 @@ class Book
      * @var array<string>|null $filePath Chemin des répertoires sources et destinations des fichiers a traiter.
      */
     protected $filePath = array("src" => 'app/src', "build" => 'app/build');
+    /**
+     * Détermine le mode de génération des fichiers html.
+     * @var string $htmlMode
+     */
+    protected $htmlMode='multiple';
 
     /**
      * Initialisation de notre objet Book.
@@ -72,6 +77,7 @@ class Book
             } else {
                 $msg = sprintf("ERREUR: le répertoire < %s > n'existe pas!", $path[$key]);
                 Console::writeln($msg, "danger");
+                Console::writeln("Le répertoire par défaut sera utilisé.");
             }
         }
     }
@@ -91,7 +97,7 @@ class Book
     }
 
     /**
-     * Fonction qui ajoute un nouveau chapitre à la fin de la liste.
+     * Ajoute un nouveau chapitre à la fin de la liste.
      *
      * @param array<string> $chapter
      */
@@ -102,11 +108,24 @@ class Book
     }
 
     /**
-     *
+     * Construit un document html a partir d'un document Markdown.
      *
      */
     public function createHtmlFromMarkdowndFile(): void
     {
         Console::writeln("Création du fichier html.");
     }
+
+    /**
+     *
+     * @param string $mode <standalone|multiple> Mode de création des cible.
+     * standalone : les fichiers sources seront concaténé,et un seul fichier cible sera généré.
+     * multiple : pour chaque fichier source, un fichier cible sera généré.
+     * @return void
+     */
+    public function setHtmlMode($mode): void
+    {
+        $this->htmlMode = $mode;
+    }
+
 }

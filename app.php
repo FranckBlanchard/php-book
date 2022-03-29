@@ -10,6 +10,11 @@ require __DIR__ . '/app/config.php';
  */
 $mybook = new \Book\Book($path, $Chapitres);
 
-$mybook->addChapter(array('Chapitre x', 'chapitre-x', 'chapitrex.md'));
+$mybook->addChapter(array('Avant-propos', 'avant-propos', 'avant-propos.md'));
+
+$mybook->setHtmlMode('standalone');
 $htmlBook = new \Book\PandocBuildHtml();
-$htmlBook->setMarkdownFileName("chapitre1.md");
+$htmlBook->setMarkdownFileName("app/src/avant-propos.md");
+$htmlBook->setHtmlFileName("app/build/avant-propos.html");
+var_dump($htmlBook);
+$htmlBook->build();
