@@ -8,5 +8,4 @@ parameters:
 	excludePaths:
 		- /vendor/*
 	ignoreErrors:
-		- '#Variable \$Chapitres might not be defined.#'
 		- '#Variable \$path might not be defined.#'

@@ -8,10 +8,9 @@ require __DIR__ . '/app/config.php';
 /**
  * @var array<array<string>> $chapitres
  */
-$mybook = new \Book\Book($path, $Chapitres);
-
-$mybook->addChapter(array('Avant-propos', 'avant-propos', 'avant-propos.md'));
-
+$mybook = new \Book\Book($path);
+$mybook->addChapter('avant-propos.md');
+$mybook->addChapter('chapitre2.md');
 $mybook->setHtmlMode('standalone');
 $htmlBook = new \Book\PandocBuildHtml();
 $htmlBook->setMarkdownFileName("app/src/avant-propos.md");

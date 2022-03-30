@@ -17,7 +17,7 @@ use Book\Utils\Console;
 class Book
 {
     /**
-     * @var array<array<string>>|null $chapters Tableau contenant la liste des chapitres.
+     * @var array<string>|null $chapters Tableau contenant la liste des chapitres.
      */
     protected $chapters = array();
 
@@ -26,28 +26,20 @@ class Book
      * @var array<string>|null $filePath Chemin des répertoires sources et destinations des fichiers a traiter.
      */
     protected $filePath = array("src" => 'app/src', "build" => 'app/build');
+
     /**
      * Détermine le mode de génération des fichiers html.
      * @var string $htmlMode
      */
-    protected $htmlMode='multiple';
+    protected $htmlMode = 'multiple';
 
     /**
      * Initialisation de notre objet Book.
      * @param array<string> $filePath Chemin des fichiers source Markdown et répertoire de destination
      * des fichiers a créer.
-     * @param array<array<string>>|null $chapters Tableaux contenant la liste des chapitres.
      */
-    public function __construct($filePath, $chapters = null)
+    public function __construct($filePath)
     {
-        /**
-         * Vérification de la liste des chapitres
-         */
-        if (is_array($chapters)) {
-            Console::writeln("Initialisation de la liste des chapitres.");
-            $this->chapters = $chapters;
-            Console::writeln("Listes des chapitres initialisé.");
-        }
         /**
          * Vérification et initialisation des chemins des répertoires
          */
@@ -99,12 +91,13 @@ class Book
     /**
      * Ajoute un nouveau chapitre à la fin de la liste.
      *
-     * @param array<string> $chapter
+     * @param string $chapter
      */
     public function addChapter($chapter): void
     {
         $this->chapters[] = $chapter;
-        Console::writeln(sprintf("Le chapitre « %s » a été ajouté.", $chapter[0]), "succes");
+        Console::writeln(sprintf("Le chapitre « %s » a été ajouté.", $chapter), "succes");
+        var_dump($this->chapters);
     }
 
     /**
