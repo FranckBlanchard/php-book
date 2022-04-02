@@ -8,4 +8,3 @@ parameters:
 	excludePaths:
 		- /vendor/*
 	ignoreErrors:
-		- '#Variable \$path might not be defined.#'

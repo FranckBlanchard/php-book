@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Book\Utils;
 
 /**
- * Cela permet de gérer l'affichage des messages dans le terminal
+ *  Console
+ *  Permet l'affichage d'informations dans le terminal.
  *
  * @author Franck Blanchard <info@aztequemedia.com>
  */
@@ -19,12 +20,12 @@ class Console
      * @param string $style Séquence d'échappement Ansi.
      * @return void
      */
-    public static function write($msg, $style): void
+    public static function write($msg, $style=""): void
     {
         $colorNormal = "\33[0m";
         $colorSucces = "\33[32m";
         $colorWarning = "\33[33m";
-        $colorDanger = "\33[31;1;4m";
+        $colorDanger = "\33[31;1m";
 
         switch ($style) {
             case 'danger': $color = $colorDanger;
@@ -48,6 +49,15 @@ class Console
     public static function writeln($msg, $style = ""): void
     {
         self::write(sprintf("%s\n", $msg), $style);
+    }
+    /**
+     * writeOk()
+     * Ajoute Ok en vert sur la même ligne
+     * @return void
+     */
+    public static function writeOk():void
+    {
+        self::writeln("\t Ok", 'succes');
     }
 
     /**

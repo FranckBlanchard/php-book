@@ -1,17 +1,18 @@
 <?php
 
-/**
- * créé le 2022-03-12
- */
+declare(strict_types=1);
 
 namespace Book;
 
+use Nette\Neon\Neon;
 use Book\Utils\Console;
 
 /**
- * Book est une class PHP pour gérer la gestion d'une documentation, en s'inspirant du fonctionnement d'un livre.
- *
+ * Créé le 2022-03-12
  * @author Franck Blanchard <info@aztequemedia.com>
+ *
+ * Book
+ * Book est une class PHP pour gérer la gestion d'une documentation, en s'inspirant du fonctionnement d'un livre. *
  *
  */
 class Book
@@ -23,9 +24,9 @@ class Book
 
     /**
      * Tableau contenant les chemins par défaut, des répertoires sources, et destinations du livre a créé.
-     * @var array<string>|null $filePath Chemin des répertoires sources et destinations des fichiers a traiter.
+     * @var array<mixed>|null $filePath Chemin des répertoires sources et destinations des fichiers a traiter.
      */
-    protected $filePath = array("src" => 'app/src', "build" => 'app/build');
+    protected $filePath = array();
 
     /**
      * Détermine le mode de génération des fichiers html.
@@ -35,43 +36,49 @@ class Book
 
     /**
      * Initialisation de notre objet Book.
-     * @param array<string> $filePath Chemin des fichiers source Markdown et répertoire de destination
-     * des fichiers a créer.
      */
-    public function __construct($filePath)
+    public function __construct()
     {
         /**
          * Vérification et initialisation des chemins des répertoires
          */
+        Console::writeln("\nBienvenue dans votre gestionnaire de livre Book.\n", 'succes');
+        $config = $this->getConfig('books.neon');
         /**
-         * Initialisation du répertoire des fichiers sources en Markdown
+         * ToDo Vérifier que $config est valide
          */
-        $this->initPath('src', $filePath);
-        Console::writeln(sprintf("Vos fichiers sources devront se trouver dans le répertoire: %s .", $filePath['src']));
-        /**
-         * Initialisation du répertoire des fichiers cibles pdf,html...
-         */
-        $this->initPath('build', $filePath);
-        Console::writeln("Fin de l'initialisation.");
+        $this->initPath($config);
     }
 
     /**
-     * @param string $key Clé du répertoire a initialiser
-     * @param array<string> $path Contient le nom des répertoires a tester.
+     *
+     * @param string $file
+     * @return array <string>
      */
-    protected function initPath($key, $path): void
+    protected function getConfig($file): array
     {
-        if (is_array($path)) {
-            if (array_key_exists($key, $path) && $this->isValidPath($path[$key])) {
-                $this->filePath[$key] = $path[$key];
-                $msg = sprintf("Initialisation du répertoire : < %s > à < %s >.", $key, $path[$key]);
-                Console::writeln($msg, "succes");
-            } else {
-                $msg = sprintf("ERREUR: le répertoire < %s > n'existe pas!", $path[$key]);
-                Console::writeln($msg, "danger");
-                Console::writeln("Le répertoire par défaut sera utilisé.");
-            }
+        Console::write("Chargement du fichier de configuration.");
+        try {
+            $config = Neon::decodeFile($file);
+        } catch (\Exception $e) {
+            Console::writeln("\nUne erreur est survenue.\n", 'danger');
+            Console::writeln(sprintf("%s \n", $e->getMessage()));
+            die();
         }
+        Console::writeOk();
+        return $config;
+    }
+
+    /**
+     * initPath()
+     * Configuration des répertoires par défaut.
+     * @param array <mixed> $path
+     */
+    protected function initPath(array $path): void
+    {
+        Console::write('Iniatisation des répertoires de l\'application.');
+        $this->filePath = $path['directories'];
+        Console::writeOk();
     }
 
     /**
@@ -112,13 +119,39 @@ class Book
     /**
      *
      * @param string $mode <standalone|multiple> Mode de création des cible.
-     * standalone : les fichiers sources seront concaténé,et un seul fichier cible sera généré.
+     *
+     * standalone : les fichiers sources seront concaténé,et un seul fichier cible sera généré.     *
      * multiple : pour chaque fichier source, un fichier cible sera généré.
      * @return void
      */
     public function setHtmlMode($mode): void
     {
         $this->htmlMode = $mode;
+    }
+
+    /**
+     * Configure les livres a créer.
+     *
+     * @param string $file Nom du projet. L'extension du fichier sert a indiquer quel fichier créer.
+     * @param string $mode <alone>|<multiple>|<all>|Drapeau servant a définir le type de fichier a créer.
+     *
+     *              alone : fabrique un fichier unique, issue de la concaténation des fichier source.
+     *
+     *              multiple : fabrique un fichier par fichier source.
+     *
+     *              all : les deux options précedement cité.
+     */
+    public function createBook($file, $mode): void
+    {
+        Console::writeln(__METHOD__);
+    }
+/**
+ * Execute la génération des livres.
+ * @return void
+ */
+    public function run(): void
+    {
+        Console::writeln(__METHOD__);
     }
 
 }

@@ -1,0 +1,20 @@
+#Définitions des répertoires
+directories :
+#Répertoire des projets
+    project : Projects
+#Répertoire des fichiers de configuration des projets
+    config : Config
+#Répertoire des fichiers sources Mardown
+    markdown : md
+#Répertoire des fichiers html
+    html : html
+#Options pour la génération des livres en Markdown
+options :
+#Pour chaque type de fichier, il y a un mode de fonctionnement
+#   -<alone>    Génère un seul fichier.
+#   -<multiple> Génère un fichier par fichier Markdown.
+#   -<all>      Génère un fichier globale et un fichier par fichier source Markdown.
+    markdown :
+        mode : alone
+    html:
+        mode:alone
