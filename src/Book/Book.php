@@ -6,6 +6,7 @@ namespace Book;
 
 use Nette\Neon\Neon;
 use Book\Utils\Console;
+use Nette\DI\Container;
 
 /**
  * Créé le 2022-03-12
@@ -17,6 +18,18 @@ use Book\Utils\Console;
  */
 class Book
 {
+/**
+ *
+ * @var \Nette\DI\Container $container
+ */
+    protected $container;
+
+    /**
+     *
+     * @var array<string>
+     */
+    protected $parameters = array();
+
     /**
      * @var array<string>|null $chapters Tableau contenant la liste des chapitres.
      */
@@ -36,9 +49,13 @@ class Book
 
     /**
      * Initialisation de notre objet Book.
+     *
+     * @param \Nette\DI\Container $container Container pour l'injection des dépendances
      */
-    public function __construct()
+    public function __construct($container)
     {
+        $this->container = $container;
+        var_dump($container->getParameters() );
         /**
          * Vérification et initialisation des chemins des répertoires
          */
@@ -48,6 +65,7 @@ class Book
          * ToDo Vérifier que $config est valide
          */
         $this->initPath($config);
+        $this->container = $container;
     }
 
     /**
@@ -77,7 +95,7 @@ class Book
     protected function initPath(array $path): void
     {
         Console::write('Iniatisation des répertoires de l\'application.');
-        $this->filePath = $path['directories'];
+        $this->filePath = $path['parameters']['directories'];
         Console::writeOk();
     }
 
@@ -145,10 +163,11 @@ class Book
     {
         Console::writeln(__METHOD__);
     }
-/**
- * Execute la génération des livres.
- * @return void
- */
+
+    /**
+     * Execute la génération des livres.
+     * @return void
+     */
     public function run(): void
     {
         Console::writeln(__METHOD__);

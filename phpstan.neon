@@ -1,10 +1,11 @@
 parameters:
-	level: 8
-	paths:
-		- app
-		- src/Book
-		- /
-		- src/Book/utils
-	excludePaths:
-		- /vendor/*
-	ignoreErrors:
+        level: 8
+        paths:
+            - app
+            - src/Book
+            - /
+            - src/Book/utils
+        excludePaths:
+            - /vendor/*
+            - temp/
+        ignoreErrors:
