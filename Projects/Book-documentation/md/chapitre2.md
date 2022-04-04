@@ -1,8 +1,15 @@
 
-## Chapitre 2.
+## Les modes de fonctionnement.
 
-Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque praemiatrix aliquotiens operatur Adrastia atque utinam semper quam vocabulo duplici etiam Nemesim appellamus: ius quoddam sublime numinis efficacis, humanarum mentium opinione lunari circulo superpositum, vel ut definiunt alii, substantialis tutela generali potentia partilibus praesidens fatis, quam theologi veteres fingentes Iustitiae filiam ex abdita quadam aeternitate tradunt omnia despectare terrena.
-Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.
-Ut enim benefici liberalesque sumus, non ut exigamus gratiam (neque enim beneficium faeneramur sed natura propensi ad liberalitatem sumus), sic amicitiam non spe mercedis adducti sed quod omnis eius fructus in ipso amore inest, expetendam putamus.
-Quae dum ita struuntur, indicatum est apud Tyrum indumentum regale textum occulte, incertum quo locante vel cuius usibus apparatum. ideoque rector provinciae tunc pater Apollinaris eiusdem nominis ut conscius ductus est aliique congregati sunt ex diversis civitatibus multi, qui atrocium criminum ponderibus urgebantur.
-Illud tamen clausos vehementer angebat quod captis navigiis, quae frumenta vehebant per flumen, Isauri quidem alimentorum copiis adfluebant, ipsi vero solitarum rerum cibos iam consumendo inediae propinquantis aerumnas exitialis horrebant.
+A la base, les fichiers sources sont écrits en Markdown qui est un langage de balisage simple.
+
+Par conventions nous écrivons un chapitre par fichier. Un livre est une succession de chapitres qui sont ordonné par une certaine logique.
+Par la suite nous pouvons définir plusieurs listes de chapitres pour fabriquer différentes versions de nos livres.
+Par exemples un livre gratuit ne contiendra pas tous les chapitres.
+A ce stade nous avons des fichiers contenants nos chapires et des fichiers contenants nos livres. Et c'est la qu'intervient la notion de mode.
+Prenons le cas du langage html, langage de balisage pour afficher les pages dans votre navigateur. Peut être voudriez vous avoir tous les chapitres traduits dans ce langage afin d'avoir la possiblilité d'en publiés certainet non pas la totalité.
+
+Nous avons donc 3 modes de définis qui sont:
+-alone : traduira le fichier globale seulement
+-multiple : traduira tous les fichiers sauf le global
+-all : les 2 options précédement cités.

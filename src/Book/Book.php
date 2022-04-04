@@ -18,10 +18,10 @@ use Nette\DI\Container;
  */
 class Book
 {
-/**
- *
- * @var \Nette\DI\Container $container
- */
+    /**
+     *
+     * @var \Nette\DI\Container $container
+     */
     protected $container;
 
     /**
@@ -36,16 +36,18 @@ class Book
     protected $chapters = array();
 
     /**
-     * Tableau contenant les chemins par défaut, des répertoires sources, et destinations du livre a créé.
-     * @var array<mixed>|null $filePath Chemin des répertoires sources et destinations des fichiers a traiter.
+     * Tableau contenant les chemins par défaut, des répertoires.
+     *
+     * @var array<string>|null $filePath Chemin des répertoires.
      */
     protected $filePath = array();
 
     /**
-     * Détermine le mode de génération des fichiers html.
-     * @var string $htmlMode
+     * Tableau regroupant les différentes options.
+     *
+     * @var array <string>|null $options
      */
-    protected $htmlMode = 'multiple';
+    protected $options = array();
 
     /**
      * Initialisation de notre objet Book.
@@ -55,17 +57,34 @@ class Book
     public function __construct($container)
     {
         $this->container = $container;
-        var_dump($container->getParameters() );
-        /**
-         * Vérification et initialisation des chemins des répertoires
-         */
         Console::writeln("\nBienvenue dans votre gestionnaire de livre Book.\n", 'succes');
-        $config = $this->getConfig('books.neon');
+        $this->initParameters($container->getParameters());
+    }
+
+    /**
+     * initParameters Initialiles les paramètres hérités du container.
+     *
+     * @param array<array <string>> $parameters Tableau de paramètre;
+     * @return void
+     */
+    protected function initParameters($parameters): void
+    {
+        Console::write('Initialisation des répertoires de l\'application.');
         /**
-         * ToDo Vérifier que $config est valide
+         * Initialisation des différents noms de répertoires
          */
-        $this->initPath($config);
-        $this->container = $container;
+        foreach ($parameters['directories'] as $key => $value) {
+            $this->filePath[$key] = $value;
+        }
+        Console::writeOk();
+        Console::write('Initialisation des options de génération des documents.');
+        /**
+         * Initialisation des différentes options
+         */
+        foreach ($parameters['options'] as $key => $value) {
+            $this->options[$key] = $value;
+        }
+        Console::writeOk();
     }
 
     /**
@@ -144,7 +163,7 @@ class Book
      */
     public function setHtmlMode($mode): void
     {
-        $this->htmlMode = $mode;
+//        $this->htmlMode = $mode;
     }
 
     /**
